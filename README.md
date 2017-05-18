@@ -4,7 +4,7 @@ Raspberry Pi door audio/video intercom
 ## Goal
 Repurpose an old RPI2/USB Camera for an automatic/smart door intercom (audio intercom and one way video)
 
-## Libraries
+## Libraries (Credits)
 https://github.com/eclipse/paho.mqtt.python<br/>
 https://github.com/azlux/pymumble<br/>
 https://github.com/larsimmisch/pyalsaaudio<br/>

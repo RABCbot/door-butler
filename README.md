@@ -17,4 +17,15 @@ USB Camera with Microphone<br/>
 Install motion <http://lavrsen.dk/foswiki/bin/view/Motion/WebHome><br/>
 Install mumble-server <http://wiki.mumble.info/wiki/Installing_Mumble><br/>
 
+## Configuration
+Find the ALSA recording device:<br/>
+arecord -l<br/>
+
+In my case, I get this:
+**** List of CAPTURE Hardware Devices ****
+card 1: U0x46d0x8ce [USB Device 0x46d:0x8ce], device 0: USB Audio [USB Audio]
+  Subdevices: 1/1
+  Subdevice #0: subdevice #0
+
+
 

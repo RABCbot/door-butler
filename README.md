@@ -19,13 +19,19 @@ Install mumble-server <http://wiki.mumble.info/wiki/Installing_Mumble><br/>
 
 ## Configuration
 Find the ALSA recording device:<br/>
-arecord -l<br/>
+arecord -L<br/>
 
-In my case, I get this:
-**** List of CAPTURE Hardware Devices ****
-card 1: U0x46d0x8ce [USB Device 0x46d:0x8ce], device 0: USB Audio [USB Audio]
-  Subdevices: 1/1
-  Subdevice #0: subdevice #0
+In my case, I get a list of all devices, with the USB Microphone listed as:
+null
+    Discard all samples (playback) or generate zero samples (capture)
+default:CARD=U0x46d0x8ce
+    USB Device 0x46d:0x8ce, USB Audio
+    Default Audio Device
+hw:CARD=U0x46d0x8ce,DEV=0
+    USB Device 0x46d:0x8ce, USB Audio
+    Direct hardware device without any conversions
 
-
+## Test
+With the device listed from previous step, perform a quick recording to a file:<br/>
+arecord -D plughw:CARD=U0x46d0x8ce,DEV=0 --duration=30 test.wav
 

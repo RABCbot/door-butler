@@ -31,6 +31,11 @@ hw:CARD=U0x46d0x8ce,DEV=0<br/>
     USB Device 0x46d:0x8ce, USB Audio<br/>
     Direct hardware device without any conversions<br/>
 
+Find card index:<br/>
+cat /proc/asound/modules<br/>
+ 0 snd_bcm2835<br/>
+ 1 snd_usb_audio<br/>
+
 ## Test
 With the device listed from previous step, perform a quick recording to a file:<br/>
 arecord -D plughw:CARD=U0x46d0x8ce,DEV=0 --duration=30 test.wav<br/>

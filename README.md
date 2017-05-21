@@ -40,3 +40,6 @@ cat /proc/asound/modules<br/>
 With the device listed from previous step, perform a quick recording to a file:<br/>
 arecord -D plughw:CARD=U0x46d0x8ce,DEV=0 --duration=30 test.wav<br/>
 
+## Reference
+https://bitbucket.org/mkuron/sip2mumble/overview
+

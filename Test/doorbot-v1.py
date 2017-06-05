@@ -29,7 +29,7 @@ if __name__ == '__main__':
     mic.setperiodsize(MIC_FRAMESIZE)
 
     # Init Mumble client
-    client = pymumble.Mumble('192.168.101.112', 'DoorBot', 64738, '2putipus', None, None, True, [], False)
+    client = pymumble.Mumble('192.168.101.112', 'DoorBot', 64738, 'password', None, None, True, [], False)
     client.set_codec_profile('audio')
     client.start()
     client.is_ready()

@@ -8,11 +8,13 @@ import queue
 import subprocess
 import wave
 
-AUDIO_LEN         = 160 # Audio chunk size
+AUDIO_LEN         = 640 # Audio chunk size
 MUMBLE_CHANNELS   = 1 # Mumble hardcoded mono
 MUMBLE_RATE       = 48000 # Mumble hardcoded rate Hz
 MUMBLE_SAMPLESIZE = 2 # Mumble hardcoded bytes per sample
 ALSA_FORMAT       = aa.PCM_FORMAT_S16_LE # 16 bits litle-endian, must macth mumble sample size
+MIC_VOLUME        = 2
+MUMBLE_SLEEP      = 0.01
 
 captureQueue = queue.Queue()
 playQueue = queue.Queue()
@@ -24,7 +26,7 @@ class MumbleBot(Thread):
         self.mumbleUsr = usr
         self.mumblePwd = pwd
         self.rate = rate
-        self.volume = 1
+        self.volume = 2
 
         try:
             self.client = pymumble.Mumble(self.mumbleHost, self.mumbleUsr, 64738, self.mumblePwd, None, None, True, [], False)
@@ -59,13 +61,16 @@ class MumbleBot(Thread):
 
     def run(self):
         while True:
+            if self.client.sound_output.get_buffer_size() > 0:
+                time.sleep(MUMBLE_SLEEP)
+            else:
+                time.sleep(10 * MUMBLE_SLEEP)
+
             data = captureQueue.get()
             data, state = audioop.ratecv(data, MUMBLE_SAMPLESIZE, MUMBLE_CHANNELS, self.rate, MUMBLE_RATE, None)
-            # data = audioop.mul(data, self.MUMBLE_CHANNELS, self.digitalVol)
-            # self.client.sound_output.add_sound(data)
+            #data = audioop.mul(data, MUMBLE_CHANNELS, MIC_VOLUME)
+            self.client.sound_output.add_sound(data)
             # captureQueue.task_done()
-            time.sleep(0.02)
-            # while self.client.sound_output.get_buffer_size() > 0.5: time.sleep(0.01)
                 
 class PlayAudio(Thread):
     
@@ -99,7 +104,7 @@ class PlayAudio(Thread):
 class CaptureAudio(Thread):
     
     def __init__(self, device, rate):
-        self.silence = 300 # Threshold to detect sound
+        self.silence = 600 # Threshold to detect sound
         self.muted = True
 
         try:
@@ -147,5 +152,5 @@ if __name__ == '__main__':
 #    spk.start()
 
     print("DoorBot running...")
-    while True: time.sleep(1)
+    while True: time.sleep(0.1)
 

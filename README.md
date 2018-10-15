@@ -1,17 +1,24 @@
 # DoorButler
-Raspberry Pi door audio/video intercom
+Smart video doorbell<br/>
 
 ## Goal
-Repurpose an old RPI2/USB Camera for an automatic/smart door intercom (audio intercom and one way video)
+Device should provide following capabilities
+- Smart voice screening (maybe using Alexa, Google or Snips)<br/>
+- Video streaming<br/>
+- Two way audio<br/>
+
+## Hardware
+Raspberry Pi Zero W <http://www.microcenter.com/product/486575/raspberry-pi-zero-w><br/>
+Playstation Eye <https://www.amazon.com/Sony-Station-Camera-Packaging-PlayStation-3/dp/B0735KNH2X/ref=pd_lpo_sbs_63_t_1?_encoding=UTF8&psc=1&refRID=TRAC8BQY437JKT9A4417><br/>
+Google AIY Voice kit <http://www.microcenter.com/product/483414/aiy-voice-kit><br/>
+or Adafruit MAX98357 <https://learn.adafruit.com/adafruit-max98357-i2s-class-d-mono-amp/overview><br />
+
+V1:
 
 ## Libraries (Credits)
 https://github.com/eclipse/paho.mqtt.python<br/>
 https://github.com/azlux/pymumble<br/>
 https://github.com/larsimmisch/pyalsaaudio<br/>
-
-## Hardware
-Raspberry Pi 2<br/>
-USB Camera with Microphone<br/>
 
 ## Installation
 Install motion <http://lavrsen.dk/foswiki/bin/view/Motion/WebHome><br/>

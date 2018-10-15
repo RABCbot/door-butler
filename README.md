@@ -13,7 +13,8 @@ Playstation Eye <https://www.amazon.com/Sony-Station-Camera-Packaging-PlayStatio
 Google AIY Voice kit <http://www.microcenter.com/product/483414/aiy-voice-kit><br/>
 or Adafruit MAX98357 <https://learn.adafruit.com/adafruit-max98357-i2s-class-d-mono-amp/overview><br />
 
-V1:
+
+V1: Using SIP software for the two way audio, this proved difficult and audio was not good maybe due to RPI2 HW
 
 ## Libraries (Credits)
 https://github.com/eclipse/paho.mqtt.python<br/>

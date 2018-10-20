@@ -44,3 +44,12 @@ Scroll to bottom and add text:
 dtoverlay=i2s-mmap
 dtoverlay=googlevoicehat-soundcard
 ```
+Confirm your HW is listed
+```
+aplay -L
+arecord -L
+```
+Test speakers
+```
+speaker-test
+```

@@ -1,4 +1,9 @@
+Create asound.conf
+```
 sudo nano /etc/asound.conf
+```
+Paste text below:
+```
 pcm.softvol {
     type softvol
     slave.pcm dmix
@@ -27,10 +32,15 @@ ctl.!default {
     type hw
     card 0
 }
+```
+repeat for ~/.asoundrc</br>
 
-copy file ~/.asoundrc
-
+Edit config.txt
+```
 sudo nano /boot/config.txt
-scroll to bottom and add
+```
+Scroll to bottom and add text:
+```
 dtoverlay=i2s-mmap
 dtoverlay=googlevoicehat-soundcard
+```

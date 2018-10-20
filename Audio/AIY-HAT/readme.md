@@ -39,8 +39,9 @@ Edit config.txt
 ```
 sudo nano /boot/config.txt
 ```
-Scroll to bottom and add text:
+Scroll to bottom and edit/add text as shown:
 ```
+#dtparam=audio=on
 dtoverlay=i2s-mmap
 dtoverlay=googlevoicehat-soundcard
 ```

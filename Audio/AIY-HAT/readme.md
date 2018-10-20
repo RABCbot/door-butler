@@ -45,6 +45,7 @@ Scroll to bottom and edit/add text as shown:
 dtoverlay=i2s-mmap
 dtoverlay=googlevoicehat-soundcard
 ```
+Reboot</br>
 Confirm your HW is listed
 ```
 aplay -L

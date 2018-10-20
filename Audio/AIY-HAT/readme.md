@@ -53,5 +53,5 @@ arecord -L
 ```
 Test speakers
 ```
-speaker-test
+speaker-test -t wav
 ```

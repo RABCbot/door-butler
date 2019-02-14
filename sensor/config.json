@@ -1,1 +1,0 @@
-{"mqtt-host": "192.168.101.113", "trigger-temperature": 70, "unit-system": "imperial", "trigger-distance": 22, "echo-pin": 27, "trigger-pin": 17, "publish-distance": false, "time-interval": 60, "topic-prefix": "home/butler/sensor/"}

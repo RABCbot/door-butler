@@ -15,7 +15,7 @@ def handle_exit(sig, frame):
 
 signal.signal(signal.SIGTERM, handle_exit)
 
-logging.basicConfig(level=logging.DEBUG,
+logging.basicConfig(level=logging.WARNING,
                     format='%(asctime)s %(levelname)s %(message)s',
                     filename=LOGGER_FILE,
                     filemode='w')
@@ -128,6 +128,10 @@ class Worker():
         verb = t[1]
         key = t[2]
         value = msg.payload.decode('ascii')
+        if verb == 'set':
+            self.set_config(key, value)
+
+    def set_config(self, key, value):
         if key == 'mqtt_host':
             self._mqtt_host = value
         if key == 'trigger_pin':
@@ -180,7 +184,7 @@ class Worker():
                 self._mqtt.stop()
                 _LOGGER.debug('Loop stopped')
                 sys.exit()
-            except (UnboundLocalError):
+            except (UnboundLocalError, SystemError):
                 pass
             except Exception as ex:
                 _LOGGER.error(str(ex))

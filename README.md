@@ -1,8 +1,8 @@
 # DoorButler
 Smart video doorbell<br/>
 
-## Goal
-Device should provide following capabilities
+## Goals
+Device should provide the following capabilities
 - Video streaming - using Motion<br/>
 - Mqtt support<br/>
 - Presence detection<br/>

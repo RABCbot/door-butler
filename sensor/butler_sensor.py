@@ -7,6 +7,7 @@ import threading
 import paho.mqtt.client as mqtt
 from hcsr04sensor import sensor
 
+FIRMWARE = 'RABCBot 2019-02-16 7AM'
 CONFIG_FILE = 'butler_sensor.json'
 LOGGER_FILE = 'butler_sensor.log'
 
@@ -55,6 +56,9 @@ class Mqtt():
         self._on_connect = None
         self._on_message = None
 
+    def __del__(self):
+        self.stop()
+
     def start(self, forever):
         _LOGGER.debug('Mqtt loop starting...')
         if forever:
@@ -78,7 +82,8 @@ class Mqtt():
         _LOGGER.debug('Mqtt connected')
         self._client.subscribe(self._topic_prefix + 'set/#')
         self._client.subscribe(self._topic_prefix + 'get/#')
-        self._client.subscribe(self._topic_prefix + 'run/#')
+        self._client.subscribe(self._topic_prefix + 'cmd/#')
+        self._client.subscribe('home/status')
         if self._on_connect is not None:
             self._on_connect(client, userdata, flags, rc)
 
@@ -96,7 +101,7 @@ class Mqtt():
             self._on_message(client, userdata, msg)
 
     def publish(self, topic, payload):
-        self._client.publish(topic, payload)
+        self._client.publish(self._topic_prefix + topic, payload)
 
 class Worker():
 
@@ -109,12 +114,14 @@ class Worker():
         self._sensor_temperature = config['sensor_temperature']
         self._distance_threshold =  config['distance_threshold']
         self._unit_system =  config['unit_system']
-        self._time_interval = config['time_interval']
         self._publish_distance = config['publish_distance']
+        self._working = False
+        self._sleep_time = config['sleep_time']
+        self._refresh_time = config['refresh_time']
         # Mqtt
-        self._topic_prefix = config['topic_prefix']
         self._mqtt = Mqtt(config['mqtt_host'], config['topic_prefix'])
         self._mqtt.on_message = self.on_message
+        self._mqtt.start(False)
         # Distance sensor
         self._sensor = sensor.Measurement(self._trigger_pin,
                                           self._echo_pin,
@@ -124,16 +131,29 @@ class Worker():
         _LOGGER.debug('Worker initialized')
 
     def on_message(self, client, userdata, msg):
+        if msg.topic == 'home/status':
+            self.send_status()
         t = msg.topic.rsplit('/', 2)
         verb = t[1]
         key = t[2]
         value = msg.payload.decode('ascii')
         if verb == 'set':
             self.set_config(key, value)
+        if verb == 'cmd':
+            self.run_command(key, value)
+
+    def send_status(self):
+        self._mqtt.publish('firmware', FIRMWARE)
+        self._mqtt.publish('trigger_pin', self._trigger_pin)
+        self._mqtt.publish('echo_pin', self._echo_pin)
+        self._mqtt.publish('sensor_temperature', self._sensor_temperature)
+        self._mqtt.publish('unit_system', self._unit_system)
+        self._mqtt.publish('distance_threshold', self._distance_threshold)
+        self._mqtt.publish('publish_distance', self._publish_distance)
+        self._mqtt.publish('sleep_time', self._sleep_time)
+        self._mqtt.publish('refresh_time', self._refresh_time)
 
     def set_config(self, key, value):
-        if key == 'mqtt_host':
-            self._mqtt_host = value
         if key == 'trigger_pin':
             self._trigger_pin = int(value)
         if key == 'echo_pin':
@@ -142,49 +162,61 @@ class Worker():
             self._sensor_temperature = int(value)
         if key == 'unit_system':
             self._unit_system =  value
-        if key == 'time_interval':
-            self._time_interval = int(value)
         if key == 'distance_threshold':
             self._distance_threshold = round(float(value))
         if key == 'publish_distance':
-            self._publish_distance = (value == 'true')
-        if key == 'topic_prefix':
-            self._topic_prefix = value
+            self._publish_distance = (value == 'True')
+        if key == 'sleep_time':
+            self._sleep_time = int(value)
+        if key == 'refresh_time':
+            self._refresh_time = int(value)
+        self._mqtt.publish(key, value)
 
 
-        #if key == 'config':
-        #    config = json.dumps(self.get_config())
-        #    _LOGGER.debug(config)
-        #    self._mqtt.publish(self._topic_prefix + 'config', config)
+    def run_command(self, key, value):
+        if key == 'start':
+            self.start()
+        if key == 'pause':
+            self.pause()
         #if key == 'write':
         #    self.write_config()
 
-    def loop(self):
+
+    def start(self):
+        if self._working == False:
+            self._working = True
+            self.work()
+
+    def pause(self):
+        if self._working == True:
+            self._working = False
+
+    def work(self):
         distance = 0
-        presence = 'OFF'
-        self._mqtt.start(False)
-        _LOGGER.debug('Loop started')
+        presence = None
        
         while True:
             try:
-                distance = self.read_distance()
-                _LOGGER.debug('Distance %s', distance)
-                if self._publish_distance:
-                    self._mqtt.publish(self._topic_prefix + 'distance', distance)
-                if distance < self._distance_threshold:
-                    presence = 'ON'
-                else:
-                    presence = 'OFF'
-                if presence != self._prev_presence or time.time() - self._prev_time > self._time_interval:
-                    _LOGGER.debug('Publish presence %s', presence)
-                    self._mqtt.publish(self._topic_prefix + 'presence', presence)
-                    self._prev_presence = presence
-                    self._prev_time = time.time()
+                if self._working:
+                    distance = self.read_distance()
+                    _LOGGER.debug('Distance %s', distance)
+                    if self._publish_distance:
+                        self._mqtt.publish('distance', distance)
+                    if distance < self._distance_threshold:
+                        presence = 'ON'
+                    else:
+                        presence = 'OFF'
+                    _LOGGER.debug('Presence %s', presence)
+                    if presence != self._prev_presence or time.time() - self._prev_time > self._refresh_time:
+                        self._mqtt.publish('presence', presence)
+                        self._prev_presence = presence
+                        self._prev_time = time.time()
+                time.sleep(self._sleep_time)
             except (KeyboardInterrupt, SystemExit):
                 self._mqtt.stop()
-                _LOGGER.debug('Loop stopped')
+                _LOGGER.debug('Worker stopped')
                 sys.exit()
-            except (UnboundLocalError, SystemError):
+            except (UnboundLocalError, SystemError, RuntimeError):
                 pass
             except Exception as ex:
                 _LOGGER.error(str(ex))
@@ -202,6 +234,6 @@ if __name__ == "__main__":
     # print(sys.argv[0])
     c = Config(CONFIG_FILE)
     w = Worker(c.Json)
-    w.loop()
+    w.start()
 
 

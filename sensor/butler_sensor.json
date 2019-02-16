@@ -1,11 +1,12 @@
 {
-    "mqtt_host": "192.168.101.113",
-    "sensor_temperature": 68,
-    "unit_system": "imperial",
-    "distance_threshold": 22,
-    "echo_pin": 27,
-    "trigger_pin": 17,
-    "publish_distance": false,
-    "time_interval": 60,
-    "topic_prefix": "home/butler/sensor/"
+"mqtt_host": "192.168.101.113",
+"sensor_temperature": 68,
+"unit_system": "imperial",
+"distance_threshold": 27,
+"echo_pin": 27,
+"trigger_pin": 17,
+"publish_distance": false,
+"refresh_time": 60,
+"sleep_time": 4,
+"topic_prefix": "home/butler/sensor/"
 }

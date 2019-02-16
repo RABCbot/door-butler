@@ -3,14 +3,15 @@ Smart video doorbell<br/>
 
 ## Goals
 Device should provide the following capabilities
-- Video streaming - using Motion<br/>
+- Video streaming<br/>
 - Mqtt support<br/>
 - Presence detection<br/>
+- Led status indicator<br/>
 - Two way audio<br/>
 - Smart voice screening (maybe using Alexa, Google or Snips)<br/>
 
 ## Current status
-Unsure how to acomplish project goals<br/>
+Video streaming resolved using Motion<br/>
 Currently focusing in simple python scripts to focus on each individual goal<br/>
 Presence detection is completed, and integrates with mqtt, using a HR-SC04 ultra sensor sensor<br/> 
 

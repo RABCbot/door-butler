@@ -14,6 +14,7 @@ curl -sS https://raw.githubusercontent.com/adafruit/Raspberry-Pi-Installer-Scrip
 
 Details from Adafruit:
 sudo nano /etc/asound.conf
+```
 pcm.speakerbonnet {
    type hw card 0
 }
@@ -51,10 +52,11 @@ pcm.!default {
     type             plug
     slave.pcm       "softvol"
 }
-
+```
 
 sudo nano /boot/config.txt
+```
 #dtparam=audio=on
 dtoverlay=hifiberry-dac
 dtoverlay=i2s-mmap
-
+```

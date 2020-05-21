@@ -7,7 +7,7 @@ Amp DIN to Raspbery Pi Pin #21<br/>
 Amp BCLK to Raspbery Pi Pin #18<br/>
 Amp LRCLK to Raspbery Pi Pin #19<br/>
 
-##Installation
+## Installation
 
 Using Adafruit script
 curl -sS https://raw.githubusercontent.com/adafruit/Raspberry-Pi-Installer-Scripts/master/i2samp.sh | bash

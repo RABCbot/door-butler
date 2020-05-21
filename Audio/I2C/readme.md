@@ -12,7 +12,7 @@ Amp LRCLK to Raspbery Pi Pin #19<br/>
 Using Adafruit script
 curl -sS https://raw.githubusercontent.com/adafruit/Raspberry-Pi-Installer-Scripts/master/i2samp.sh | bash
 
-Details from Adafruit:
+Details from Adafruit:<br/>
 sudo nano /etc/asound.conf
 ```
 pcm.speakerbonnet {
@@ -54,7 +54,7 @@ pcm.!default {
 }
 ```
 
-sudo nano /boot/config.txt
+sudo nano /boot/config.txt<br/>
 ```
 #dtparam=audio=on
 dtoverlay=hifiberry-dac

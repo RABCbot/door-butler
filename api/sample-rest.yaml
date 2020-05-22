@@ -1,0 +1,22 @@
+butler_init:
+  url: http://192.168.101.4:8080/api/run
+  method: 'POST'
+  payload: '{"commands": [{"args": "gpio mode 26 out"},{"args": "gpio mode 27 out"},{"args": "gpio mode 28 out"}]}'
+  content_type: 'application/json'
+butler_led:
+  url: http://192.168.101.4:8080/api/run
+  method: 'POST'
+  payload: '{"commands": [{"args": "gpio write 26 {{red}}"},{"args": "gpio write 27 {{green}}"},{"args": "gpio write 28 {{blue}}"}]}'
+  content_type: 'application/json'
+butler_record:
+  url: http://192.168.101.4:8080/api/run
+  method: 'POST'
+  payload: '{"commands": [{"args": "arecord -q -d 30 -r 16000 -f S16_LE -c 1 -t raw {{file}}"}]}'
+  content_type: 'application/json'
+butler_play:
+  url: http://192.168.101.4:8080/api/run
+  method: 'POST'
+  payload: '{"commands": [{"args": "aplay -q {{file}}"}]}'
+  content_type: 'application/json'
+
+

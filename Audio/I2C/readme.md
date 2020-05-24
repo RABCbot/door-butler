@@ -60,3 +60,14 @@ sudo nano /boot/config.txt<br/>
 dtoverlay=hifiberry-dac
 dtoverlay=i2s-mmap
 ```
+
+Reboot</br>
+Confirm your HW is listed
+```
+aplay -L
+arecord -L
+```
+Test speakers
+```
+speaker-test -t wav
+```

@@ -1,2 +1,4 @@
 flask
 gpio
+curl
+jq

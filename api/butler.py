@@ -1,3 +1,4 @@
+import shlex
 import subprocess
 import logging
 import json
@@ -21,12 +22,15 @@ def command():
     data = request.json
     for cmd in data["commands"]:
       logging.debug(cmd)
-      subprocess.check_call(cmd["args"], shell=True, timeout=60)
+      o = subprocess.check_output(cmd["args"], shell=True, timeout=60)
+      str = o.decode("ascii")
+      logging.debug(str)
+      ret = json.loads(str)
   except Exception as ex:
-    msg = {"status": "exception", "message":str(ex)}
+    ret = {"status": "exception", "message":str(ex)}
     status = 500
     logging.error(ex)
-  return json.dumps(msg), status
+  return json.dumps(ret), status
 
 if __name__ == "__main__":
   app.debug = True

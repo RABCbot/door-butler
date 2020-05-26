@@ -22,10 +22,11 @@ def command():
     data = request.json
     for cmd in data["commands"]:
       logging.debug(cmd)
-      o = subprocess.check_output(cmd["args"], shell=True, timeout=60)
-      str = o.decode("ascii")
+      cp = subprocess.run(cmd["args"], shell=True, timeout=60, capture_output=True)
+      str = cp.stdout.decode("ascii")
       logging.debug(str)
-      ret = json.loads(str)
+      if "stdout" in cmd:
+        ret = json.loads(str)
   except Exception as ex:
     ret = {"status": "exception", "message":str(ex)}
     status = 500

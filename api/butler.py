@@ -16,7 +16,7 @@ def status():
 
 @app.route("/api/run", methods=["POST"])
 def command():
-  msg = ok
+  ret = ok
   status = 200
   try:
     data = request.json

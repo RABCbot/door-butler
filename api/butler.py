@@ -8,16 +8,23 @@ app = Flask(__name__)
 logging.basicConfig(filename="butler.log",level=logging.DEBUG)
 
 ok = {"status": "ok"}
+last_response = None
 
 @app.route("/api/status", methods=["GET"])
 def status():
   return json.dumps(ok)
 
+@app.route("/api/response", methods=["GET"])
+def response():
+  return json.dumps(last_response)
+
 
 @app.route("/api/run", methods=["POST"])
 def command():
-  ret = ok
+  global last_response
+  _response = ok
   status = 200
+
   try:
     data = request.json
     for cmd in data["commands"]:
@@ -26,12 +33,15 @@ def command():
       str = cp.stdout.decode("ascii")
       logging.debug(str)
       if "stdout" in cmd:
-        ret = json.loads(str)
+        _response = {"response":json.loads(str)}
+        if "payload" in cmd:
+          _response["payload"] = cmd["payload"]
+        last_response = _response
   except Exception as ex:
-    ret = {"status": "exception", "message":str(ex)}
+    _response = {"args":cmd["args"], "exception":str(ex)}
     status = 500
     logging.error(ex)
-  return json.dumps(ret), status
+  return json.dumps(_response), status
 
 if __name__ == "__main__":
   app.debug = True

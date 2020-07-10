@@ -7,6 +7,7 @@ Device should provide the following capabilities
 - Led status indicator<br/>
 - MQTT<br/>
 - Video streaming<br/>
+
 Maybe:
 - Presence detection<br/>
 - REST API<br/>

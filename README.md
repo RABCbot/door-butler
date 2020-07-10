@@ -6,9 +6,9 @@ Device should provide the following capabilities
 - Smart voice screening<br/>
 - Led status indicator<br/>
 - MQTT<br/>
-- Presence detection<br/>
-Maybe:
 - Video streaming<br/>
+Maybe:
+- Presence detection<br/>
 - REST API<br/>
 - Two way audio<br/>
 

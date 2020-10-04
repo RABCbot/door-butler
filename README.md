@@ -16,8 +16,9 @@ Wish list of capabilities:
 * Google AIY voice hat<br/>
 * PlayStation Eye <br/>
 ## Software
-* [WIT.AI](https://wit.ai/)
-* Node-red 
+* Node-red to run linux system commands: amixer, aplay and arecord
+* Node-red also serves as dialog manager and mqtt client
+* [WIT.AI](https://wit.ai/) to process utterances and recognize intents
 ![Flow](node-red/butler-flow.png)
 ## Installation
 1. Install [Raspberry Pi OS](https://www.raspberrypi.org/downloads/) to an SD card

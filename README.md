@@ -2,11 +2,11 @@
 Interactive voice assistant that helps identifies who is at the door and route visitors<br/>
 ## Goals
 Wish list of capabilities:
-* Smart voice screening<br/>
-* Dialog management<br/>
-* Led status indicator<br/>
-* Prerecorded answers<br/>
-* MQTT<br/>
+* Smart voice screening (done)<br/>
+* Dialog management (done)<br/>
+* Led status indicator (done)<br/>
+* Prerecorded answers (done)<br/>
+* MQTT (done)<br/>
 * Video streaming<br/>
 * Presence detection<br/>
 * REST API<br/>

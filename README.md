@@ -19,3 +19,6 @@ Wish list of capabilities:
 * [WIT.AI](https://wit.ai/)
 * Node-red 
 ![Flow](node-red/butler-flow.png)
+## Instalation
+1. Install node-red following [instructions](https://nodered.org/docs/getting-started/raspberrypi)
+

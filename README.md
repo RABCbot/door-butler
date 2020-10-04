@@ -20,5 +20,7 @@ Wish list of capabilities:
 * Node-red 
 ![Flow](node-red/butler-flow.png)
 ## Installation
-1. Install node-red following [instructions](https://nodered.org/docs/getting-started/raspberrypi)
+1. Install [Raspberry Pi OS](https://www.raspberrypi.org/downloads/) to an SD card
+2. Install [Node-Red](https://nodered.org/docs/getting-started/raspberrypi)
+3. 
 

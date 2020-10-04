@@ -15,6 +15,6 @@ Device should provide the following capabilities
 - Raspberry PI 3B+<br/>
 - Google AIY voice hat<br/>
 ## Software
-- WIT.AI
+- ![WIT.AI](https://wit.ai/)
 - Node-red 
 ![Flow](node-red/butler-flow.png)

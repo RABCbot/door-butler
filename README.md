@@ -8,9 +8,8 @@ Wish list of capabilities:
 * Prerecorded answers (done)<br/>
 * MQTT (done)<br/>
 * Integration with Home-assistant (done)<br/>
-* Video streaming<br/>
 * Presence detection<br/>
-* REST API<br/>
+* Video streaming<br/>
 * Two-way audio<br/>
 ## Hardware
 * Raspberry Pi Zero W<br/>

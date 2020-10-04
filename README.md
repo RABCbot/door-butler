@@ -16,7 +16,7 @@ Wish list of capabilities:
 * Google AIY voice hat<br/>
 * PlayStation Eye <br/>
 ## Software
-* Node-red to run linux system commands: amixer, aplay and arecord
+* [Node-red](https://nodered.org/) to run linux system commands: amixer, aplay and arecord
 * Node-red also serves as dialog manager and mqtt client
 * [WIT.AI](https://wit.ai/) to process utterances and recognize intents
 ![Flow](node-red/butler-flow.png)

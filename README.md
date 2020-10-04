@@ -7,6 +7,7 @@ Wish list of capabilities:
 * Led status indicator (done)<br/>
 * Prerecorded answers (done)<br/>
 * MQTT (done)<br/>
+* Integration with Home-assistant (done)<br/>
 * Video streaming<br/>
 * Presence detection<br/>
 * REST API<br/>

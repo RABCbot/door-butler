@@ -22,5 +22,5 @@ Wish list of capabilities:
 ## Installation
 1. Install [Raspberry Pi OS](https://www.raspberrypi.org/downloads/) to an SD card
 2. Install [Node-Red](https://nodered.org/docs/getting-started/raspberrypi)
-3. 
+3. Navigate to http://<your-pi-ip>:1880 and import the [DoorBtler flow](https://github.com/RABCbot/door-butler/blob/master/node-red/butler-flow.json)
 

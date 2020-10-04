@@ -28,4 +28,5 @@ Wish list of capabilities:
 2. Install [Node-Red](https://nodered.org/docs/getting-started/raspberrypi)
 3. Navigate to http://hostname:1880 and import the [DoorButler flow](https://github.com/RABCbot/door-butler/blob/master/node-red/butler-flow.json)
 4. Create an [app](https://wit.ai/docs/quickstart) with wit.ai
-
+## Home-assistant
+(![Hass](node-red/home-assistant.png))

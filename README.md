@@ -12,8 +12,9 @@ Wish list of capabilities:
 * REST API<br/>
 * Two-way audio<br/>
 ## Hardware
-* Raspberry PI 3B+<br/>
+* Raspberry Pi Zero W<br/>
 * Google AIY voice hat<br/>
+* PlayStation Eye <br/>
 ## Software
 * [WIT.AI](https://wit.ai/)
 * Node-red 

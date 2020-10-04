@@ -13,7 +13,7 @@ Device should provide the following capabilities
 - Two-way audio<br/>
 ## Hardware
 - Raspberry PI 3B+<br/>
-- Google AIY voide hat<br/>
+- Google AIY voice hat<br/>
 ## Software
 - WIT.AI
 - Node-red 
